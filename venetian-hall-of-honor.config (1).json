@@ -1,0 +1,201 @@
+{
+  "customer": "The Venetian Resort Las Vegas",
+  "widgetType": "Custom (Recognition Hub)",
+  "title": "The Hall of Honor",
+  "branding": {
+    "logos": [
+      {
+        "name": "Company logo (griffin + wordmark)",
+        "embeddedMime": "image/png",
+        "treatment": "Background removed; alpha mask recolored maroon (light) / cream (dark)"
+      }
+    ],
+    "badges": [
+      {
+        "name": "Bravo! Winner",
+        "embeddedMime": "image/webp",
+        "px": 180
+      },
+      {
+        "name": "Golden Gondola Honoree",
+        "embeddedMime": "image/webp",
+        "px": 180
+      },
+      {
+        "name": "Proud Veteran (original, used for veterans with no branch listed)",
+        "embeddedMime": "image/webp",
+        "px": 180
+      },
+      {
+        "name": "Proud Veteran base (branch list removed from ring)",
+        "embeddedMime": "image/webp",
+        "px": 180,
+        "use": "Branch badges: Army, Navy, Air Force, Marine Corps, National Guard, Royal Air Force; branch name drawn on the bottom ring as SVG text in gold serif"
+      },
+      {
+        "name": "Years of Service (general)",
+        "embeddedMime": "image/webp",
+        "px": 180,
+        "use": "Main Service Anniversaries tile and panel header; built from the 25-year badge with the numerals removed and the griffin re-centered at 1.3x"
+      },
+      {
+        "name": "Years of Service 5 / 10 / 15 / 20 / 25",
+        "embeddedMime": "image/webp",
+        "px": 180
+      }
+    ],
+    "badgeNote": "Official branch seals not reproduced; branch badges are built from the customer's Proud Veteran artwork",
+    "primaryColor": "#5E000A",
+    "secondaryColor": "#FBEEDA",
+    "accentColor": "#E83F55",
+    "accentColors": {
+      "ok": null,
+      "warn": null,
+      "bad": null
+    }
+  },
+  "content": {
+    "layout": "Grid of 4 program badges; tapping a badge opens nested drop-downs; one open per level; newest first",
+    "programs": {
+      "bravo": {
+        "source": "ACTIVE_TM_BRAVO.xlsx, BRAVO MASTER SHEET",
+        "records": 540,
+        "drilldown": "Year > Quarter > Names",
+        "row": "Name, department",
+        "note": "Quarter taken from QUARTER column, else derived from MONTH; 1999 rows with no month shown as 'Year-round'"
+      },
+      "goldenGondola": {
+        "source": "ACTIVE_TM_GOLDEN_GONDOLA-_2025.xlsx and -_2026.xlsx (period sheets only; ACTIVE = Match)",
+        "records": 816,
+        "drilldown": "Year > Quarter > Names",
+        "row": "Name, tier (Experience / Maestro / Unexpected Joy), department",
+        "note": "Quarter from Posting Date; when the date is missing (#REF!) or outside its sheet's period, the period start date is used. Nomination comments excluded."
+      },
+      "serviceAnniversaries": {
+        "source": "ACTIVE_TM_SERVICE_ANNIVERSARY.xlsx (exported Oct 9, 2026)",
+        "records": 940,
+        "year": 2026,
+        "drilldown": "Milestone badge (5/10/15/20/25) > Month (all 12, incl. upcoming) > Names",
+        "row": "Name, anniversary date, department",
+        "includes": "Active and On Leave",
+        "note": "Names taken from the ACTIVE TM roster (Bravo workbook) by TM#",
+        "mainBadge": "General Years of Service badge (no number); milestone badges 5/10/15/20/25 appear on open"
+      },
+      "veterans": {
+        "source": "ACTIVE_TM_VETERANS.xlsx",
+        "records": 247,
+        "drilldown": "Branch badge > Names",
+        "branches": {
+          "Army": 78,
+          "Navy": 42,
+          "Air Force": 43,
+          "Marine Corps": 35,
+          "National Guard": 5,
+          "Royal Air Force": 1,
+          "Veterans (no branch listed)": 50
+        },
+        "mapping": "Multi-branch entries listed under each branch (shown with '+ Other branch'); Army Reserve > Army; Army National Guard and Air National Guard > National Guard",
+        "consent": "Customer confirmed all names may be displayed"
+      }
+    },
+    "search": "All four programs, as-you-type, accent-insensitive; each result shows its badge and award; tap a result to open it in its drop-down",
+    "statusStates": {
+      "standard": {
+        "trigger": "No ID, unknown ID, or unresolved token",
+        "display": "No personal card"
+      },
+      "accolade": {
+        "trigger": "Viewer has a Bravo!, Golden Gondola or 2026 service milestone",
+        "display": "Most recent accolade up to today (an upcoming 2026 anniversary is shown only if there is nothing earlier)",
+        "copy": {
+          "bravo": "Congratulations on your Bravo! award / {Qn YYYY}",
+          "goldenGondola": "Congratulations on your Golden Gondola / {tier}, {Qn YYYY}",
+          "servicePast": "Happy {n}-year anniversary / Celebrated {Mon D, YYYY}",
+          "serviceUpcoming": "Your {n}-year anniversary is coming up / {Mon D, YYYY}"
+        }
+      },
+      "veteran": {
+        "trigger": "Viewer is on the veterans list",
+        "display": "'Thank you for your service' card with branch; if the viewer also has an accolade, the thank-you appears as an extra line on that card"
+      }
+    },
+    "viewButton": "Opens the drop-down path to the viewer's entry and highlights it; viewer's rows starred everywhere",
+    "tone": "Celebratory, polished",
+    "language": "en",
+    "privacy": "Only names, departments and award details embedded. Employee numbers stored as FNV-1a hashes; emails, phones, supervisors, comments and pronunciation notes excluded."
+  },
+  "data": {
+    "primaryParam": "employeeid",
+    "paramNamesCaseInsensitive": true,
+    "matching": "employeeid first, employeeCode fallback; leading zeros, short letter prefixes and spaces ignored",
+    "exampleValue": "14277",
+    "workjamVariablesUsed": [
+      "employeeId",
+      "employeeCode",
+      "language",
+      "aspectRatio"
+    ],
+    "workjamVariablesRead": [
+      "externalLocationId",
+      "externalLocationCode",
+      "address",
+      "city",
+      "stateOrProvince",
+      "country",
+      "zipCode",
+      "externalRegionId",
+      "externalRegionCode",
+      "employeeId",
+      "employeeCode",
+      "username",
+      "language",
+      "aspectRatio"
+    ],
+    "customVariables": [
+      {
+        "name": "search",
+        "type": "string",
+        "fallback": "empty",
+        "displayRule": "Pre-fills the search box"
+      }
+    ],
+    "dataSource": "Static, embedded from the five project spreadsheets",
+    "refreshMs": null
+  },
+  "display": {
+    "defaultAspectRatio": "auto",
+    "sizing": "Fills the iframe/viewport and reflows live on resize",
+    "supportedAspectRatios": [
+      "auto",
+      "standard",
+      "square",
+      "landscape",
+      "portrait"
+    ],
+    "renderingContext": "Phone tile (primary); scales to tablet, desktop and lobby screens",
+    "layoutTiers": {
+      "wide (>=760 wide, >=420 tall, landscape-ish)": "Left: header, personal card, search, 2x2 badge grid. Right: drop-downs or search results",
+      ">=480 wide": "4 badges in one row",
+      "<=300 tall": "Compact badge tiles; personal card shows headline only",
+      "<400 wide": "Department drops under name"
+    },
+    "testedViewports": [
+      "320x180",
+      "320x240",
+      "375x667",
+      "400x300",
+      "520x390",
+      "768x1024",
+      "1024x768",
+      "1280x720",
+      "1366x300",
+      "1920x1080"
+    ],
+    "exampleUrl": "https://alexa-sheth-wj.github.io/Test-Widget-2/?employeeid={{employeeId}}"
+  },
+  "fileSizeBytes": 217879,
+  "sizeJustification": "Over the 150 KB target (under the 250 KB ceiling): ~87 KB is ten badge images (WebP) and ~92 KB is 2,543 award records across four programs",
+  "browserNote": "Badges use WebP (supported in iOS 14+ and all current Android WebViews)",
+  "version": "2.1.0",
+  "builtOn": "2026-10-14"
+}
